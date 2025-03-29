@@ -26,14 +26,14 @@ public class Controller {
 
 
         switch (distribucion.intValue()) { // Convertimos a entero para usar en el switch
-            case 1: // Distribución uniforme
+            case 1: // Distribución uniforme (Ejemplo para probar http://localhost:8080/api/muestra/1000,1,10,20,0,0,0)
                 resultado = Generadores.generadorUniforme(muestra.intValue(), a, b);
                 break;
-            case 2: // Distribución exponencial (debes implementar generadorExponencial)
-                //resultado = Generadores.generadorExponencial(muestra.intValue(), lambda);
+            case 2: // Distribución exponencial ()
+                resultado = Generadores.generadorExponencial(muestra, lambda);
                 break;
-            case 3: // Distribución normal (debes implementar generadorNormal)
-                //resultado = Generadores.generadorNormal(muestra.intValue(), media, desviacion);
+            case 3: // Distribución normal
+                resultado = Generadores.generadorNormal(muestra, desviacion, desviacion);
                 break;
             default: // Opción no válida
                 throw new IllegalArgumentException("Opción no válida. Selecciona 1, 2 o 3.");

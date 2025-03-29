@@ -33,15 +33,18 @@ function Datos() {
         lambda: yup
             .number()
             .required('Lambda es requerido')
-            .positive('Lambda debe ser mayor a 0'),
+            .min(0, "El valor debe ser mayor o igual a 0"),
         desv: yup
             .number()
             .required('La desviación estándar es requerida')
-            .moreThan(0, 'Debe ser mayor a 0'),
+            .min(0, "El valor debe ser mayor o igual a 0"),
         media: yup
             .number()
             .required('La media es requerida')
-            .moreThan(0, 'Debe ser mayor a 0'),
+            .min(0, "El valor debe ser mayor o igual a 0"),
+        intervalos: yup
+            .string()
+            .required("Debe seleccionar un intervalo")
     });
 
     return (
@@ -58,6 +61,7 @@ function Datos() {
                 desv: null,
                 media: null,
                 lambda: null,
+                intervalos: null
             }}
         >
             {({ handleSubmit, handleChange, values, touched, errors, resetForm }) => {
@@ -83,6 +87,60 @@ function Datos() {
                                 />
                                 <Form.Control.Feedback type="invalid">
                                     {errors.number}
+                                </Form.Control.Feedback>
+                            </Form.Group>
+                        </Row>
+
+                        <Row className="mb-3">
+                            <Form.Group as={Col} md="12" controlId="validationFormikIntervalos">
+                                <div>
+                                    <Form.Check
+                                        inline
+                                        type="radio"
+                                        label="10 intervalos"
+                                        name="intervalos"
+                                        value="10"
+                                        onChange={handleChange}
+                                        checked={values.intervalos === "10"}
+                                        isInvalid={touched.intervalos && !!errors.intervalos}
+                                        id="intervalo10"
+                                    />
+                                    <Form.Check
+                                        inline
+                                        type="radio"
+                                        label="15 intervalos"
+                                        name="intervalos"
+                                        value="15"
+                                        onChange={handleChange}
+                                        checked={values.intervalos === "15"}
+                                        isInvalid={touched.intervalos && !!errors.intervalos}
+                                        id="intervalo15"
+                                    />
+                                    <Form.Check
+                                        inline
+                                        type="radio"
+                                        label="20 intervalos"
+                                        name="intervalos"
+                                        value="20"
+                                        onChange={handleChange}
+                                        checked={values.intervalos === "20"}
+                                        isInvalid={touched.intervalos && !!errors.intervalos}
+                                        id="intervalo20"
+                                    />
+                                    <Form.Check
+                                        inline
+                                        type="radio"
+                                        label="30 intervalos"
+                                        name="intervalos"
+                                        value="30"
+                                        onChange={handleChange}
+                                        checked={values.intervalos === "30"}
+                                        isInvalid={touched.intervalos && !!errors.intervalos}
+                                        id="intervalo30"
+                                    />
+                                </div>
+                                <Form.Control.Feedback type="invalid">
+                                    {errors.intervalos}
                                 </Form.Control.Feedback>
                             </Form.Group>
                         </Row>

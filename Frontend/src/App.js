@@ -1,25 +1,28 @@
-// App.js
-import React, { useState } from "react";
-import axios from "axios";
-import "bootstrap/dist/css/bootstrap.css";
-import "bootstrap-icons/font/bootstrap-icons.css";
-import Datos from './components/Datos/Datos';
-import Histograma from "./components/Histograma/Histograma";
+import { useState } from 'react';
+import Datos from './components/ObtenerSerie/ObtenerSerie';
+import Histograma from './components/Histograma/Histograma';
+import MostrarSerie from './components/MostrarSerie/MostrarSerie'
 
 function App() {
-  
+  const [datosGenerados, setDatosGenerados] = useState(null);
 
   return (
-    
-    <div className="App">
-      <Datos/>
-      <div className="d-flex justify-content-center mt-4"> 
-      
-        <Histograma />
-      </div>
-      
+    <div>
+      {/* Enviamos setDatosGenerados a Datos para actualizar el estado en App */}
+      <Datos setDatosGenerados={setDatosGenerados} />
+
+      {/* Si los datos fueron generados, los pasamos a Histograma */}
+      {datosGenerados ? (
+        <>
+          <Histograma data={datosGenerados} />
+          <MostrarSerie serie={datosGenerados} />
+        </>
+      ) : (
+        <p>Cargando datos...</p>  // Mostrar mensaje mientras se cargan los datos
+      )}
     </div>
   );
 }
 
 export default App;
+

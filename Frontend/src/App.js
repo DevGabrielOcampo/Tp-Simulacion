@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Datos from './components/ObtenerSerie/ObtenerSerie';
 import Histograma from './components/Histograma/Histograma';
 import MostrarSerie from './components/MostrarSerie/MostrarSerie'
+import TablaFrecuencias from './components/TablaFrecuencia/TablaFrecuencia';
 
 function App() {
   const [datosGenerados, setDatosGenerados] = useState(null);
@@ -18,7 +19,12 @@ function App() {
             data={datosGenerados.data}  // Pasamos los datos generados
             numBins={parseInt(datosGenerados.intervalos, 10)}  // Pasamos la cantidad de intervalos
           />
-          <MostrarSerie serie={datosGenerados.data} />
+          <TablaFrecuencias data={datosGenerados.data}  // Pasamos los datos generados
+            numBins={parseInt(datosGenerados.intervalos, 10)}  // Pasamos la cantidad de intervalos
+          />
+          <MostrarSerie 
+            serie={datosGenerados.data}  // Pasamos los datos generados
+          />
         </>
       ) : (
         <p>Cargando datos...</p>  // Mostrar mensaje mientras se cargan los datos

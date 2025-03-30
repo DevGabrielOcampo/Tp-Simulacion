@@ -98,11 +98,14 @@ function ObtenerSerie({ setDatosGenerados }) {
 
         setIsLoading(true);
         // Aquí se hace la petición al backend        
-        const { number, option, rangeA, rangeB, desv, media, lambda } = values;
+        const { number, option, rangeA, rangeB, desv, media, lambda, intervalos } = values;
         const url = `http://localhost:8080/api/muestra/${number},${option},${rangeA || 0},${rangeB || 0},${desv || 0},${media || 0},${lambda || 0}`;
         try {
             const response = await axios.get(url);
-            setDatosGenerados(response.data);
+            setDatosGenerados({
+                data: response.data,   // Datos generados
+                intervalos: intervalos  // Pasamos la cantidad de intervalos
+            });
         } catch (error) {
             console.error('Error al obtener los datos:', error);
         } finally {

@@ -14,8 +14,11 @@ function App() {
       {/* Si los datos fueron generados, los pasamos a Histograma */}
       {datosGenerados ? (
         <>
-          <Histograma data={datosGenerados} />
-          <MostrarSerie serie={datosGenerados} />
+          <Histograma
+            data={datosGenerados.data}  // Pasamos los datos generados
+            numBins={parseInt(datosGenerados.intervalos, 10)}  // Pasamos la cantidad de intervalos
+          />
+          <MostrarSerie serie={datosGenerados.data} />
         </>
       ) : (
         <p>Cargando datos...</p>  // Mostrar mensaje mientras se cargan los datos

@@ -12,25 +12,21 @@ function Histograma({ data, numBins }) {
         const max = Math.max(...data);
 
         const getBins = (data, min, max, numBins) => {
-            // Aseguramos que los intervalos no sean menores que 0
             const binWidth = (max - min) / numBins;
             const bins = [];
             let binStart = min;
-
-            // Creamos los bins (intervalos)
+        
             for (let i = 0; i < numBins; i++) {
                 bins.push({ x: binStart, y: 0 });
                 binStart += binWidth;
             }
-
-            // Contamos la cantidad de datos en cada intervalo
+        
             data.forEach(value => {
-                const binIndex = Math.floor((value - min) / binWidth);
-                if (binIndex >= 0 && binIndex < bins.length) {
-                    bins[binIndex].y++;
-                }
+                let binIndex = Math.floor((value - min) / binWidth);
+                if (binIndex === numBins) binIndex--; // Ajustar para incluir el valor máximo
+                bins[binIndex].y++;
             });
-
+        
             return bins;
         };
 

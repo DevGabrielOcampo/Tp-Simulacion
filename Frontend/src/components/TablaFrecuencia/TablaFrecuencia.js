@@ -15,10 +15,9 @@ function TablaFrecuencias({ data, numBins }) {
 
         // Contar las frecuencias de cada intervalo
         data.forEach(value => {
-            const binIndex = Math.floor((value - min) / binWidth);
-            if (binIndex >= 0 && binIndex < numBins) {
-                bins[binIndex]++;
-            }
+            let binIndex = Math.floor((value - min) / binWidth);
+            if (binIndex === numBins) binIndex--; // Ajustar el índice si es igual al número de bins
+            bins[binIndex]++;
         });
 
         // Crear los intervalos con sus frecuencias

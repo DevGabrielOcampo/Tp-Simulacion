@@ -7,7 +7,7 @@ import java.util.Random;
 public class Generadores {
 
     public static List<Float> generadorUniforme(float muestra, float a, float b) {
-        List<Float> numerosUniformes = new ArrayList<>();
+        List<Float> numerosUniformes = new ArrayList();
         Random random = new Random('1');
 
         for (int i = 0; i < muestra; i++) {

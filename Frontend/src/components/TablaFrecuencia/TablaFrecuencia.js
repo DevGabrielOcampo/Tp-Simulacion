@@ -6,8 +6,8 @@ function TablaFrecuencias({ data, numBins }) {
     useEffect(() => {
         if (!data || data.length === 0) return;
 
-        const min = Math.min(...data);
-        const max = Math.max(...data);
+        const min = data.reduce((a,b) => Math.min(a,b), Infinity);  // Definir min y max fuera de la función
+        const max = data.reduce((a,b) => Math.max(a,b), -Infinity);
         const binWidth = (max - min) / numBins;
 
         const bins = Array(numBins).fill(0); // Inicializar los bins con 0 frecuencias

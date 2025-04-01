@@ -8,8 +8,9 @@ function Histograma({ data, numBins }) {
     useEffect(() => {
         if (!data || data.length === 0) return;
 
-        const min = Math.min(...data);  // Definir min y max fuera de la función
-        const max = Math.max(...data);
+        const min = data.reduce((a,b) => Math.min(a,b), Infinity);  // Definir min y max fuera de la función
+        const max = data.reduce((a,b) => Math.max(a,b), -Infinity);
+        console.log("Min:", min, "Max:", max);  // Verificar los valores de min y max
 
         const getBins = (data, min, max, numBins) => {
             const binWidth = (max - min) / numBins;

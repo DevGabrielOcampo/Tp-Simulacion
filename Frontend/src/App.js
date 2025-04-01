@@ -8,7 +8,7 @@ function App() {
   const [datosGenerados, setDatosGenerados] = useState(null);
 
   return (
-    <div>
+    <div >
       {/* Enviamos setDatosGenerados a Datos para actualizar el estado en App */}
       <Datos setDatosGenerados={setDatosGenerados} />
 

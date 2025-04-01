@@ -3,6 +3,7 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { Button, Form, Row, Col, InputGroup, FormControl } from 'react-bootstrap';
 import axios from 'axios';
+import './obtenerSerie.css'
 
 function ObtenerSerie({ setDatosGenerados }) {
     const [isLoading, setIsLoading] = useState(false);
@@ -133,10 +134,12 @@ function ObtenerSerie({ setDatosGenerados }) {
             }}
         >
             {({ handleSubmit, handleChange, values, touched, errors, resetForm }) => (
-                <Form noValidate onSubmit={handleSubmit}>
-                    <Row className="mb-3">
+                <Form noValidate onSubmit={handleSubmit} className='form'>
+                    <Row className='muestra'>
+                        <Form.Label className='subtitulo'>Tamaño de la muestra</Form.Label>
                         <Form.Group as={Col} md="4" controlId="validationFormikNumber">
                             <Form.Control
+                                className='caja-inputs'
                                 type="number"
                                 name="number"
                                 value={values.number}
@@ -144,115 +147,88 @@ function ObtenerSerie({ setDatosGenerados }) {
                                 isInvalid={touched.number && !!errors.number}
                                 placeholder="Ingrese tamaño de muestra"
                             />
-                            <Form.Control.Feedback type="invalid">
+                            <Form.Control.Feedback type="invalid" className='errores'>
                                 {errors.number}
                             </Form.Control.Feedback>
                         </Form.Group>
                     </Row>
 
-                    <Row className="mb-3">
-                        <Form.Group as={Col} md="12" controlId="validationFormikIntervalos">
-                            <div>
-                                <Form.Check
-                                    inline
-                                    type="radio"
-                                    label="10 intervalos"
-                                    name="intervalos"
-                                    value="10"
-                                    onChange={handleChange}
-                                    checked={values.intervalos === "10"}
+                    <div className='opciones-grp'>
+                    <Row >
+                            <Form.Label className='subtitulo'>Cantidad de intervalos</Form.Label>
+                            <Form.Group as={Col} md="12" controlId="validationFormikIntervalos">
+                                <Form.Select 
+                                    name="intervalos" 
+                                    value={values.intervalos} 
+                                    onChange={handleChange} 
                                     isInvalid={touched.intervalos && !!errors.intervalos}
-                                    id="intervalo10"
-                                />
-                                <Form.Check
-                                    inline
-                                    type="radio"
-                                    label="15 intervalos"
-                                    name="intervalos"
-                                    value="15"
-                                    onChange={handleChange}
-                                    checked={values.intervalos === "15"}
-                                    isInvalid={touched.intervalos && !!errors.intervalos}
-                                    id="intervalo15"
-                                />
-                                <Form.Check
-                                    inline
-                                    type="radio"
-                                    label="20 intervalos"
-                                    name="intervalos"
-                                    value="20"
-                                    onChange={handleChange}
-                                    checked={values.intervalos === "20"}
-                                    isInvalid={touched.intervalos && !!errors.intervalos}
-                                    id="intervalo20"
-                                />
-                                <Form.Check
-                                    inline
-                                    type="radio"
-                                    label="30 intervalos"
-                                    name="intervalos"
-                                    value="30"
-                                    onChange={handleChange}
-                                    checked={values.intervalos === "30"}
-                                    isInvalid={touched.intervalos && !!errors.intervalos}
-                                    id="intervalo30"
-                                />
-                            </div>
-                            <Form.Control.Feedback type="invalid">
-                                {errors.intervalos}
-                            </Form.Control.Feedback>
-                        </Form.Group>
-                    </Row>
+                                    className='custom-select'
+                                >
+                                    <option value="">Seleccione una opción</option>
+                                    <option value="10">10 intervalos</option>
+                                    <option value="15">15 intervalos</option>
+                                    <option value="20">20 intervalos</option>
+                                    <option value="30">30 intervalos</option>
+                                </Form.Select>
+                                <Form.Control.Feedback type="invalid" className='errores'>
+                                    {errors.intervalos}
+                                </Form.Control.Feedback>
+                            </Form.Group>
+                        </Row>
 
-                    <Row className="mb-3">
-                        <Form.Group as={Col} md="12" controlId="validationFormikOptions">
-                            <div>
-                                <Form.Check
-                                    inline
-                                    type="radio"
-                                    label="Uniforme [a, b]"
-                                    name="option"
-                                    value="1"
-                                    onChange={handleChange}
-                                    checked={values.option === "1"}
-                                    isInvalid={touched.option && !!errors.option}
-                                    id="option1"
-                                />
-                                <Form.Check
-                                    inline
-                                    type="radio"
-                                    label="Exponencial"
-                                    name="option"
-                                    value="2"
-                                    onChange={handleChange}
-                                    checked={values.option === "2"}
-                                    isInvalid={touched.option && !!errors.option}
-                                    id="option2"
-                                />
-                                <Form.Check
-                                    inline
-                                    type="radio"
-                                    label="Normal"
-                                    name="option"
-                                    value="3"
-                                    onChange={handleChange}
-                                    checked={values.option === "3"}
-                                    isInvalid={touched.option && !!errors.option}
-                                    id="option3"
-                                />
-                            </div>
-                            <Form.Control.Feedback type="invalid">
-                                {errors.option}
-                            </Form.Control.Feedback>
-                        </Form.Group>
-                    </Row>
+                        <Row>
+                            <Form.Label className='subtitulo'>Tipos de distribuciones</Form.Label>
+                            <Form.Group as={Col} md="12" controlId="validationFormikOptions">
+                                <div className='intervalos'>
+                                    <Form.Check
+                                        inline
+                                        type="radio"
+                                        label="Uniforme [a, b]"
+                                        name="option"
+                                        value="1"
+                                        onChange={handleChange}
+                                        checked={values.option === "1"}
+                                        isInvalid={touched.option && !!errors.option}
+                                        id="option1"
+                                    />
+                                    <Form.Check
+                                        inline
+                                        type="radio"
+                                        label="Exponencial"
+                                        name="option"
+                                        value="2"
+                                        onChange={handleChange}
+                                        checked={values.option === "2"}
+                                        isInvalid={touched.option && !!errors.option}
+                                        id="option2"
+                                    />
+                                    <Form.Check
+                                        inline
+                                        type="radio"
+                                        label="Normal"
+                                        name="option"
+                                        value="3"
+                                        onChange={handleChange}
+                                        checked={values.option === "3"}
+                                        isInvalid={touched.option && !!errors.option}
+                                        id="option3"
+                                    />
+                                </div>
+                                <Form.Control.Feedback type="invalid" className='errores'>
+                                    {errors.option}
+                                </Form.Control.Feedback>
+                            </Form.Group>
+                        </Row>
+                    </div>
 
                     {/* Dist Uniforme: [a,b] */}
                     {values.option === "1" && (
-                        <Row className="mb-3">
+                        <Row >
                             <Col md="6">
-                                <InputGroup>
+                            <Form.Label>Limites</Form.Label>
+                                <InputGroup className="opcionales">
                                     <FormControl
+                                        className='caja-inputs'
                                         type="number"
                                         name="rangeA"
                                         placeholder="Valor a"
@@ -261,6 +237,7 @@ function ObtenerSerie({ setDatosGenerados }) {
                                         isInvalid={touched.rangeA && !!errors.rangeA}
                                     />
                                     <FormControl
+                                        className='caja-inputs'
                                         type="number"
                                         name="rangeB"
                                         placeholder="Valor b"
@@ -269,7 +246,7 @@ function ObtenerSerie({ setDatosGenerados }) {
                                         isInvalid={touched.rangeB && !!errors.rangeB}
                                     />
                                 </InputGroup>
-                                <FormControl.Feedback type="invalid">
+                                <FormControl.Feedback type="invalid" className='errores'>
                                     {errors.rangeA || errors.rangeB}
                                 </FormControl.Feedback>
                             </Col>
@@ -278,10 +255,13 @@ function ObtenerSerie({ setDatosGenerados }) {
 
                     {/* Dist Exp: lambda */}
                     {values.option === "2" && (
-                        <Row className="mb-3">
+                        <Row >
                             <Col md="6">
-                                <InputGroup>
+                            <Form.Label>Valor de lambda</Form.Label>
+
+                                <InputGroup className="opcionales">
                                     <FormControl
+                                        className='caja-inputs'
                                         type="number"
                                         name="lambda"
                                         placeholder="Lambda"
@@ -289,7 +269,7 @@ function ObtenerSerie({ setDatosGenerados }) {
                                         onChange={handleChange}
                                         isInvalid={touched.lambda && !!errors.lambda}
                                     />
-                                    <Form.Control.Feedback type="invalid">
+                                    <Form.Control.Feedback type="invalid" className='errores'>
                                         {errors.lambda}
                                     </Form.Control.Feedback>
                                 </InputGroup>
@@ -299,11 +279,12 @@ function ObtenerSerie({ setDatosGenerados }) {
 
                     {/* Dist Normal: Media, desviación estandar */}
                     {values.option === "3" && (
-                        <Row className="mb-3">
-                            <Col md="6">
+                        <Row>
+                            <Col md="6" >
                                 <Form.Label>Desviación estándar y Media</Form.Label>
-                                <InputGroup>
+                                <InputGroup  className="opcionales">
                                     <FormControl
+                                        className='caja-inputs'
                                         type="number"
                                         name="desv"
                                         placeholder="Desviación"
@@ -311,11 +292,12 @@ function ObtenerSerie({ setDatosGenerados }) {
                                         onChange={handleChange}
                                         isInvalid={touched.desv && !!errors.desv}
                                     />
-                                    <FormControl.Feedback type="invalid">
+                                    <FormControl.Feedback type="invalid" className='errores'>
                                         {errors.desv}
                                     </FormControl.Feedback>
 
                                     <FormControl
+                                        className='caja-inputs'
                                         type="number"
                                         name="media"
                                         placeholder="Media"
@@ -323,7 +305,7 @@ function ObtenerSerie({ setDatosGenerados }) {
                                         onChange={handleChange}
                                         isInvalid={touched.media && !!errors.media}
                                     />
-                                    <FormControl.Feedback type="invalid">
+                                    <FormControl.Feedback type="invalid" className='errores'>
                                         {errors.media}
                                     </FormControl.Feedback>
                                 </InputGroup>
@@ -332,17 +314,19 @@ function ObtenerSerie({ setDatosGenerados }) {
                     )}
                     {/* <div>{JSON.stringify(errors)}</div> */}
 
-                    <Button type="submit" disabled={isLoading}>
-                        {isLoading ? 'Generando...' : 'Generar'}
-                    </Button>
+                    <div className='boton-grp'>
+                        <Button type="submit" disabled={isLoading} className='boton'>
+                            {isLoading ? 'Generando...' : 'Generar'}
+                        </Button>
 
-                    <Button
-                        variant="secondary"
-                        className="ms-2"
-                        onClick={() => resetForm()}
-                    >
-                        Limpiar
-                    </Button>
+                        <Button
+                            variant="secondary"
+                            className="boton-limpiar"
+                            onClick={() => resetForm()}
+                        >
+                            Limpiar
+                        </Button>
+                    </div>
                 </Form>
             )}
         </Formik>

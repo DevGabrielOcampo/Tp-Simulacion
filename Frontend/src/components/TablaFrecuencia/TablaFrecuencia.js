@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import './tabla.css'
 
 function TablaFrecuencias({ data, numBins }) {
     const [frequencies, setFrequencies] = useState([]);
@@ -35,7 +36,7 @@ function TablaFrecuencias({ data, numBins }) {
 
     return (
         <div>
-            <h3>Tabla de Frecuencias</h3>
+            <h2>Tabla de Frecuencias</h2>
             <table border="1">
                 <thead>
                     <tr>

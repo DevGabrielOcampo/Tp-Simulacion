@@ -1,0 +1,33 @@
+.container{
+    padding-block: 40px;
+}
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    gap: 10px;
+}
+
+.text {
+    word-wrap: break-word;
+    white-space: pre-wrap;
+}
+
+.button {
+    padding: 8px 12px;
+    border: none;
+    background-color: #2caffe;
+    color: black;
+    cursor: pointer;
+    border-radius: 8px;
+    margin-right: 5px;
+}
+
+.button:hover {
+    background-color: #0056b3;
+}
+.ver-mas {
+    display: block;
+    margin: 10px auto 0;
+}

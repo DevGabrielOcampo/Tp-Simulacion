@@ -35,9 +35,9 @@ function TablaFrecuencias({ data, numBins }) {
     }, [data, numBins]);
 
     return (
-        <div>
+        <div className='tabla-container'>
             <h2>Tabla de Frecuencias</h2>
-            <table border="1">
+            <table border="1" className='tabla-frecuencias'>
                 <thead>
                     <tr>
                         <th>Intervalo</th>

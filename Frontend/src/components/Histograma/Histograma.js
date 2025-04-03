@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
+import './histograma.css';
 
 function Histograma({ data, numBins }) {
     const [chartOptions, setChartOptions] = useState(null);
@@ -35,7 +36,7 @@ function Histograma({ data, numBins }) {
 
         setChartOptions({
             chart: { type: 'column' },
-            title: { text: 'Histograma de Datos' },
+            title: { text: '' },
             xAxis: {
                 title: { text: 'Valor' },
                 categories: bins.map((bin, index) => {
@@ -52,7 +53,8 @@ function Histograma({ data, numBins }) {
     }, [data, numBins]);
 
     return (
-        <div>
+        <div className='histograma'>
+            <h2>Histograma</h2>
             {chartOptions && <HighchartsReact highcharts={Highcharts} options={chartOptions} />}
         </div>
     );

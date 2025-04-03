@@ -14,6 +14,7 @@ function ObtenerSerie({ setDatosGenerados }) {
             .required("Se necesita ingresar un número")
             .positive("Número positivo")
             .integer("Debe ser un número entero")
+            .moreThan(1, "El número debe ser mayor a 1")
             .max(1000000, "El número no puede ser mayor que 1000000"),
 
         intervalos: Yup
@@ -142,7 +143,7 @@ function ObtenerSerie({ setDatosGenerados }) {
         setIsLoading(true);
         // Aquí se hace la petición al backend        
         const { number, option, rangeA, rangeB, desv, media, lambda, intervalos } = values;
-        const url = 'http://localhost:8080/api/muestra/${number},${option},${rangeA || 0},${rangeB || 0},${desv || 0},${media || 0},${lambda || 0}';
+        const url = `http://localhost:8080/api/muestra/${number},${option},${rangeA || 0},${rangeB || 0},${desv || 0},${media || 0},${lambda || 0}`;
         try {
             const response = await axios.get(url);
             setDatosGenerados({

@@ -26,12 +26,10 @@ function App() {
             serie={datosGenerados.data}  // Pasamos los datos generados
           />
         </>
-      ) : (
-        <p>Cargando datos...</p>  // Mostrar mensaje mientras se cargan los datos
-      )}
+      ) : null} {/* Eliminamos el <p>Cargando datos...</p> */}
     </div>
   );
 }
 
-export default App;
+export default App;
 

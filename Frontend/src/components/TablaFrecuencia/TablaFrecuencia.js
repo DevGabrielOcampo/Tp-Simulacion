@@ -1,27 +1,27 @@
 import React, { useState, useEffect } from 'react';
-import './tabla.css'
+import './tabla.css';
 
 function TablaFrecuencias({ data, numBins }) {
     const [frequencies, setFrequencies] = useState([]);
+    const [totalFrequency, setTotalFrequency] = useState(0);
 
     useEffect(() => {
         if (!data || data.length === 0) return;
 
-        const min = data.reduce((a,b) => Math.min(a,b), Infinity);  // Definir min y max fuera de la función
-        const max = data.reduce((a,b) => Math.max(a,b), -Infinity);
+        const min = data.reduce((a, b) => Math.min(a, b), Infinity);
+        const max = data.reduce((a, b) => Math.max(a, b), -Infinity);
         const binWidth = (max - min) / numBins;
 
-        const bins = Array(numBins).fill(0); // Inicializar los bins con 0 frecuencias
+        const bins = Array(numBins).fill(0);
         const intervals = [];
+        let total = 0;
 
-        // Contar las frecuencias de cada intervalo
         data.forEach(value => {
             let binIndex = Math.floor((value - min) / binWidth);
-            if (binIndex === numBins) binIndex--; // Ajustar el índice si es igual al número de bins
+            if (binIndex === numBins) binIndex--; 
             bins[binIndex]++;
         });
 
-        // Crear los intervalos con sus frecuencias
         for (let i = 0; i < numBins; i++) {
             const start = min + i * binWidth;
             const end = start + binWidth;
@@ -29,9 +29,11 @@ function TablaFrecuencias({ data, numBins }) {
                 interval: `${start.toFixed(2)} - ${end.toFixed(2)}`,
                 frequency: bins[i],
             });
+            total += bins[i];
         }
 
         setFrequencies(intervals);
+        setTotalFrequency(total);
     }, [data, numBins]);
 
     return (
@@ -51,6 +53,10 @@ function TablaFrecuencias({ data, numBins }) {
                             <td>{row.frequency}</td>
                         </tr>
                     ))}
+                    <tr>
+                        <td><strong>Total</strong></td>
+                        <td><strong>{totalFrequency}</strong></td>
+                    </tr>
                 </tbody>
             </table>
         </div>

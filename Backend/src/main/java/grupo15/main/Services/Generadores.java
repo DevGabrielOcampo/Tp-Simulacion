@@ -11,8 +11,10 @@ public class Generadores {
         Random random = new Random(); // Usaba seed 1
 
         for (int i = 0; i < muestra; i++) {
-            float numeroAleatorio = random.nextFloat(); // Número aleatorio entre 0 y 1
+            float numeroAleatorio = random.nextFloat(); // Número aleatorio entre 0 y 1 [0,1)
             float numeroTransformado = numeroAleatorio * (b - a) + a; // Transformación al intervalo [a, b)
+
+            //x=a+(b−a)⋅U
 
             // Redondear a 4 decimales
             float numeroRedondeado = Math.round(numeroTransformado * 10000f) / 10000f;
@@ -30,6 +32,9 @@ public class Generadores {
             float numeroAleatorio = random.nextFloat(); // Número aleatorio entre 0 y 1
             float numeroTransformado = (float) (-Math.log(1 - numeroAleatorio) / lambda); // Transformación a distribucion exponencial
 
+            //x=−1/λ  (  ln(1−U)  )
+
+
             // Redondear a 4 decimales
             float numeroRedondeado = Math.round(numeroTransformado * 10000f) / 10000f;
             numerosUniformes.add(numeroRedondeado);
@@ -39,8 +44,13 @@ public class Generadores {
 
 
 
+
     public static List<Float> generadorNormal(float cantidad, float media, float desviacion) {
         List<Float> muestra = new ArrayList<>();
+
+        //Box-Muller.
+
+
         Random random = new Random(); // Usaba seed 10
         float PI = (float) Math.PI;
 
@@ -48,6 +58,8 @@ public class Generadores {
         float u1 = random.nextFloat();
         if (u1 == 0.0f) u1 = 0.000001f; // Evitar u1 = 0
         float u2 = random.nextFloat();
+        //pq log(0) no def
+
 
         float i = 0.0f;
         while (i < cantidad) {
@@ -76,7 +88,6 @@ public class Generadores {
 
         return muestra;
     }
-
 }
 
 

@@ -1,4 +1,5 @@
 package grupo15.main.Controller;
+// Forma parte del paquete grupo15.main.Controller
 
 import grupo15.main.Services.Generadores;
 import org.springframework.http.ResponseEntity;
@@ -8,20 +9,32 @@ import java.util.ArrayList;
 import java.util.List;
 
 @CrossOrigin(origins = {"http://localhost:3000", "http://192.168.1.66:3000"})
+// Permitimos el acceso CORS desde dos origenes distintos,
+// para comunicarnos con el front
+
 @RestController
 @RequestMapping("/api")
 public class Controller {
     @GetMapping("/muestra/{datos}")
+//  (p.ej. /api/muestra/1000,1,10,20,0,0,0).
+
+
+    //Define un controlador REST en Spring BOOT que expone un
+    // endpoint para generar números aleatorios según diferentes
+    // distriiciones estadísticas
+
+
+
     // Recibe 4 floats, el primer representa la muestra, el segundo la distribucion, el tercero y cuarto los intervalos [A, B]
     // el quinto desviacion, el sexto media, el septimo lambda
     public ResponseEntity<List<Float>> recibirNumero(@PathVariable List<Float> datos) {
         Float muestra = datos.get(0);     // Cantidad de números a generar
-        Float distribucion = datos.get(1); // Tipo de distribución
+        Float distribucion = datos.get(1); // Tipo de distribución (1, 2 o 3)
         Float a = datos.get(2);          // Límite inferior del intervalo
         Float b = datos.get(3);          // Límite superior del intervalo
-        Float desviacion = datos.get(4); // Desviación estándar (si aplica)
-        Float media = datos.get(5);      // Media (si aplica)
-        Float lambda = datos.get(6);     // Parámetro lambda (si aplica)
+        Float desviacion = datos.get(4); // Desviación estándar (si aplica)(0 sino)
+        Float media = datos.get(5);      // Media (si aplica)(0 sino)
+        Float lambda = datos.get(6);     // Parámetro lambda (si aplica)(0 sino)
         List<Float> resultado = new ArrayList<>();
 
 
